@@ -1,424 +1,473 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>DELE A1 Practice Test</title>
-        <style>
-            body {
-                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-                max-width: 900px;
-                margin: 0 auto;
-                padding: 20px;
-                background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);
-                min-height: 100vh;
-            }
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>DELE A1 Practice Test</title>
+    <style>
+      /* ──────────────────────────────────────────────────────────────────────────── */
+      /* Base Styles                                                                 */
+      /* ──────────────────────────────────────────────────────────────────────────── */
 
-            .container {
-                background: white;
-                padding: 40px;
-                border-radius: 10px;
-                box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            }
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 20px;
+        background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);
+        min-height: 100vh;
+      }
 
-            h1 {
-                text-align: center;
-                color: #d2691e;
-                border-bottom: 3px solid #d2691e;
-                padding-bottom: 15px;
-                margin-bottom: 30px;
-            }
+      .container {
+        background: white;
+        /* On desktop, keep some padding—but we will shrink on narrow screens */
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      }
 
-            .section-header {
-                background: #d2691e;
-                color: white;
-                padding: 12px 20px;
-                margin: 30px 0 20px 0;
-                font-weight: bold;
-                border-radius: 5px;
-            }
+      h1 {
+        text-align: center;
+        color: #d2691e;
+        border-bottom: 3px solid #d2691e;
+        padding-bottom: 15px;
+        margin-bottom: 30px;
+      }
 
-            .question {
-                margin: 25px 0;
-                padding: 20px;
-                border: 1px solid #ddd;
-                background: #fafafa;
-                border-radius: 8px;
-            }
+      .section-header {
+        background: #d2691e;
+        color: white;
+        padding: 12px 20px;
+        margin: 30px 0 20px 0;
+        font-weight: bold;
+        border-radius: 5px;
+      }
 
-            .question-number {
-                font-weight: bold;
-                margin-bottom: 15px;
-                color: #d2691e;
-            }
+      .question {
+        margin: 20px 0; /* Slightly less space than before */
+        padding: 16px; /* Shrink padding inside each question box */
+        border: 1px solid #ddd;
+        background: #fafafa;
+        border-radius: 8px;
+      }
 
-            .spanish {
-                font-size: 1.3em;
-                font-weight: bold;
-                margin: 15px 0;
-                color: #2c3e50;
-            }
+      .question-number {
+        font-weight: bold;
+        margin-bottom: 12px;
+        color: #d2691e;
+        /* Reduce font-size so it doesn’t dwarf the passage */
+        font-size: 1em;
+      }
 
-            .options {
-                margin: 15px 0;
-            }
+      .spanish {
+        font-size: 1.2em; /* A bit smaller than 1.3em */
+        font-weight: bold;
+        margin: 12px 0;
+        color: #2c3e50;
+      }
 
-            .option {
-                display: block;
-                margin: 10px 0;
-                padding: 12px 15px;
-                border: 2px solid #ddd;
-                background: white;
-                cursor: pointer;
-                transition: all 0.3s ease;
-                border-radius: 6px;
-            }
+      .options {
+        margin: 12px 0; /* Slightly less than before */
+      }
 
-            .option:hover {
-                background: #fff8dc;
-                border-color: #d2691e;
-            }
+      .option {
+        display: block;
+        margin: 8px 0; /* Tighter spacing */
+        padding: 10px 12px; /* Tighter padding */
+        border: 2px solid #ddd;
+        background: white;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border-radius: 6px;
+      }
 
-            .option.selected {
-                background: #d2691e;
-                color: white;
-                border-color: #d2691e;
-            }
+      .option:hover {
+        background: #fff8dc;
+        border-color: #d2691e;
+      }
 
-            .option.correct {
-                background: #27ae60;
-                color: white;
-                border-color: #27ae60;
-            }
+      .option.selected {
+        background: #d2691e;
+        color: white;
+        border-color: #d2691e;
+      }
 
-            .option.incorrect {
-                background: #e74c3c;
-                color: white;
-                border-color: #e74c3c;
-            }
+      .option.correct {
+        background: #27ae60;
+        color: white;
+        border-color: #27ae60;
+      }
 
-            .submit-btn {
-                display: block;
-                width: 200px;
-                margin: 30px auto;
-                padding: 15px;
-                background: #d2691e;
-                color: white;
-                border: none;
-                border-radius: 8px;
-                cursor: pointer;
-                font-size: 1.1em;
-                transition: background 0.3s ease;
-            }
+      .option.incorrect {
+        background: #e74c3c;
+        color: white;
+        border-color: #e74c3c;
+      }
 
-            .submit-btn:hover {
-                background: #b8860b;
-            }
+      .submit-btn {
+        display: block;
+        width: 180px; /* A little narrower */
+        margin: 20px auto; /* Less margin */
+        padding: 12px; /* Less padding */
+        background: #d2691e;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 1em; /* Smaller button text */
+        transition: background 0.3s ease;
+      }
 
-            .submit-btn:disabled {
-                background: #999;
-                cursor: not-allowed;
-            }
+      .submit-btn:hover {
+        background: #b8860b;
+      }
 
-            .result {
-                text-align: center;
-                margin: 20px 0;
-                padding: 20px;
-                border-radius: 8px;
-                font-size: 1.2em;
-                font-weight: bold;
-            }
+      .submit-btn:disabled {
+        background: #999;
+        cursor: not-allowed;
+      }
 
-            .result.pass {
-                background: #d4edda;
-                color: #155724;
-                border: 2px solid #27ae60;
-            }
+      .result {
+        text-align: center;
+        margin: 20px 0;
+        padding: 16px;
+        border-radius: 8px;
+        font-size: 1.1em;
+        font-weight: bold;
+      }
 
-            .result.fail {
-                background: #f8d7da;
-                color: #721c24;
-                border: 2px solid #e74c3c;
-            }
+      .result.pass {
+        background: #d4edda;
+        color: #155724;
+        border: 2px solid #27ae60;
+      }
 
-            .explanation {
-                margin-top: 10px;
-                padding: 10px;
-                background: #e8f4f8;
-                border-left: 4px solid #17a2b8;
-                font-size: 0.9em;
-                border-radius: 4px;
-                display: none;
-            }
+      .result.fail {
+        background: #f8d7da;
+        color: #721c24;
+        border: 2px solid #e74c3c;
+      }
 
-            .instruction {
-                background: #e9ecef;
-                padding: 15px;
-                margin: 20px 0;
-                border-left: 4px solid #6c757d;
-                border-radius: 4px;
-            }
+      .explanation {
+        margin-top: 8px;
+        padding: 8px;
+        background: #e8f4f8;
+        border-left: 4px solid #17a2b8;
+        font-size: 0.85em;
+        border-radius: 4px;
+        display: none;
+      }
 
-            /* ←— ONLY this .reading-passage block remains: */
-            .reading-passage {
-                background: #f8f9fa;
-                /* Match the padding of .question so it doesn’t appear “taller” */
-                padding: 10px 12px;
-                /* Slim down the top/bottom margin for consistency */
-                margin: 10px 0;
-                /* Thinner left border so it’s less bulky */
-                border-left: 3px solid #d2691e;
-                /* Same font-size as the rest of the question text */
-                font-size: 1em;
-                line-height: 1.4;
-            }
+      .instruction {
+        background: #e9ecef;
+        padding: 12px;
+        margin: 20px 0;
+        border-left: 4px solid #6c757d;
+        border-radius: 4px;
+      }
 
-            /* ←— Media query for narrow screens: */
-            @media screen and (max-width: 600px) {
-                .question-number {
-                    font-size: 1em;
-                    margin-bottom: 10px;
-                }
-                .reading-passage {
-                    /* Even tighter padding/margin on small phones */
-                    padding: 8px 10px;
-                    margin: 8px 0;
-                }
-                .options .option {
-                    /* Slightly shrink each answer choice on narrow widths */
-                    font-size: 0.95em;
-                    padding: 10px 12px;
-                }
-            }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <h1>🇪🇸 DELE A1 Examen de Práctica</h1>
-            
-            <div class="instruction">
-                <strong>Instrucciones:</strong> Selecciona la mejor respuesta para cada pregunta. Este examen sigue el formato oficial del DELE A1.
-            </div>
+      /* ←───────────────────────────────────────────────────────────── */
+      /* ONLY ONE .reading-passage DEFINITION (revised & tighter):       */
+      /* ←───────────────────────────────────────────────────────────── */
+      .reading-passage {
+        background: #f8f9fa;
+        /* Even tighter padding inside the passage */
+        padding: 8px 10px;
+        /* Very flush top/bottom margin */
+        margin: 8px 0;
+        /* Thin left border that won’t dominate */
+        border-left: 2px solid #d2691e;
+        /* Match font-size exactly to question text */
+        font-size: 1em;
+        line-height: 1.4;
+      }
 
-            <div class="section-header">COMPRENSIÓN DE LECTURA</div>
-            
-            <div class="question" data-answer="1">
-                <div class="question-number">
-                    Pregunta 1. Lee el texto y selecciona la respuesta correcta:
-                </div>
-                <div class="reading-passage">
-                    Hola, me llamo María. Tengo 25 años y soy profesora. Vivo en Madrid con mi hermana. 
-                    Me gusta leer libros y ver películas. Los fines de semana voy al parque con mis amigos.
-                </div>
-                <div>
-                    <strong>¿Cuál es la profesión de María?</strong>
-                </div>
-                <div class="options">
-                    <div class="option" data-value="0">a) Estudiante</div>
-                    <div class="option" data-value="1">b) Profesora</div>
-                    <div class="option" data-value="2">c) Doctora</div>
-                    <div class="option" data-value="3">d) Enfermera</div>
-                </div>
-                <div class="explanation">El texto dice claramente "soy profesora"</div>
-            </div>
+      /* ←───────────────────────────────────────────────────────────── */
+      /* MEDIA QUERY FOR NARROW SCREENS (≤600px)                        */
+      /* This will shrink container padding, question padding, etc.     */
+      /* ←───────────────────────────────────────────────────────────── */
+      @media screen and (max-width: 600px) {
+        body {
+          padding: 12px; /* Less gutter on very narrow phones */
+        }
+        .container {
+          padding: 20px; /* Shrink container padding on mobile */
+        }
+        h1 {
+          font-size: 1.3em; /* Slightly scale down page title */
+          margin-bottom: 20px;
+        }
+        .section-header {
+          padding: 10px 16px;
+          margin: 20px 0 16px 0;
+        }
+        .question {
+          margin: 16px 0;
+          padding: 12px;
+        }
+        .question-number {
+          font-size: 0.95em;
+          margin-bottom: 8px;
+        }
+        .spanish {
+          font-size: 1.1em;
+          margin: 10px 0;
+        }
+        .options {
+          margin: 10px 0;
+        }
+        .option {
+          margin: 6px 0;
+          padding: 8px 10px;
+          font-size: 0.95em;
+        }
+        .submit-btn {
+          width: 160px;
+          padding: 10px;
+          font-size: 0.95em;
+          margin: 16px auto;
+        }
+        .reading-passage {
+          /* Even more compressed on narrow screens */
+          padding: 6px 8px;
+          margin: 6px 0;
+          border-left: 2px solid #d2691e;
+          line-height: 1.3;
+        }
+      }
+    </style>
+  </head>
 
-            <div class="question" data-answer="2">
-                <div class="question-number">
-                    Pregunta 2. Según el texto anterior:
-                </div>
-                <div>
-                    <strong>¿Con quién vive María?</strong>
-                </div>
-                <div class="options">
-                    <div class="option" data-value="0">a) Con sus padres</div>
-                    <div class="option" data-value="1">b) Sola</div>
-                    <div class="option" data-value="2">c) Con su hermana</div>
-                    <div class="option" data-value="3">d) Con sus amigos</div>
-                </div>
-                <div class="explanation">El texto menciona "Vivo en Madrid con mi hermana"</div>
-            </div>
+  <body>
+    <div class="container">
+      <h1>🇪🇸 DELE A1 Examen de Práctica</h1>
 
-            <div class="section-header">CONOCIMIENTOS DE LA LENGUA</div>
+      <div class="instruction">
+        <strong>Instrucciones:</strong> Selecciona la mejor respuesta para cada
+        pregunta. Este examen sigue el formato oficial del DELE A1.
+      </div>
 
-            <div class="question" data-answer="0">
-                <div class="question-number">
-                    Pregunta 3. Completa la frase:
-                </div>
-                <div class="spanish">Yo _____ estudiante de español.</div>
-                <div class="options">
-                    <div class="option" data-value="0">a) soy</div>
-                    <div class="option" data-value="1">b) es</div>
-                    <div class="option" data-value="2">c) son</div>
-                    <div class="option" data-value="3">d) eres</div>
-                </div>
-                <div class="explanation">Con "yo" se usa "soy" (primera persona singular del verbo ser)</div>
-            </div>
+      <div class="section-header">COMPRENSIÓN DE LECTURA</div>
 
-            <div class="question" data-answer="1">
-                <div class="question-number">
-                    Pregunta 4. Selecciona la forma correcta:
-                </div>
-                <div class="spanish">Nosotros _____ en casa.</div>
-                <div class="options">
-                    <div class="option" data-value="0">a) está</div>
-                    <div class="option" data-value="1">b) estamos</div>
-                    <div class="option" data-value="2">c) están</div>
-                    <div class="option" data-value="3">d) estás</div>
-                </div>
-                <div class="explanation">"Estamos" es la forma correcta para "nosotros" del verbo estar</div>
-            </div>
-
-            <div class="question" data-answer="2">
-                <div class="question-number">
-                    Pregunta 5. ¿Cuál es el plural de "el niño"?
-                </div>
-                <div class="options">
-                    <div class="option" data-value="0">a) los niña</div>
-                    <div class="option" data-value="1">b) las niños</div>
-                    <div class="option" data-value="2">c) los niños</div>
-                    <div class="option" data-value="3">d) el niños</div>
-                </div>
-                <div class="explanation">El plural masculino es "los niños"</div>
-            </div>
-
-            <div class="question" data-answer="0">
-                <div class="question-number">
-                    Pregunta 6. Completa con el artículo correcto:
-                </div>
-                <div class="spanish">_____ mesa es grande.</div>
-                <div class="options">
-                    <div class="option" data-value="0">a) La</div>
-                    <div class="option" data-value="1">b) El</div>
-                    <div class="option" data-value="2">c) Los</div>
-                    <div class="option" data-value="3">d) Las</div>
-                </div>
-                <div class="explanation">"Mesa" es femenino singular, por eso usa "la"</div>
-            </div>
-
-            <div class="question" data-answer="3">
-                <div class="question-number">
-                    Pregunta 7. ¿Qué hora es?
-                </div>
-                <div class="spanish">2:30</div>
-                <div class="options">
-                    <div class="option" data-value="0">a) Son las dos y cuarto</div>
-                    <div class="option" data-value="1">b) Son las tres menos cuarto</div>
-                    <div class="option" data-value="2">c) Son las dos en punto</div>
-                    <div class="option" data-value="3">d) Son las dos y media</div>
-                </div>
-                <div class="explanation">"Y media" significa 30 minutos después de la hora</div>
-            </div>
-
-            <div class="question" data-answer="1">
-                <div class="question-number">
-                    Pregunta 8. Selecciona la respuesta correcta:
-                </div>
-                <div class="spanish">¿De dónde eres?</div>
-                <div class="options">
-                    <div class="option" data-value="0">a) Tengo 20 años</div>
-                    <div class="option" data-value="1">b) Soy de México</div>
-                    <div class="option" data-value="2">c) Me llamo Juan</div>
-                    <div class="option" data-value="3">d) Estoy bien</div>
-                </div>
-                <div class="explanation">La pregunta sobre origen se responde con "Soy de..."</div>
-            </div>
-
-            <div class="question" data-answer="2">
-                <div class="question-number">
-                    Pregunta 9. ¿Cuál es la forma correcta del presente?
-                </div>
-                <div class="spanish">Ella _____ todos los días.</div>
-                <div class="options">
-                    <div class="option" data-value="0">a) estudiar</div>
-                    <div class="option" data-value="1">b) estudias</div>
-                    <div class="option" data-value="2">c) estudia</div>
-                    <div class="option" data-value="3">d) estudiamos</div>
-                </div>
-                <div class="explanation">"Estudia" es la tercera persona singular de "estudiar"</div>
-            </div>
-
-            <div class="question" data-answer="0">
-                <div class="question-number">
-                    Pregunta 10. Selecciona la preposición correcta:
-                </div>
-                <div class="spanish">El libro está _____ la mesa.</div>
-                <div class="options">
-                    <div class="option" data-value="0">a) en</div>
-                    <div class="option" data-value="1">b) con</div>
-                    <div class="option" data-value="2">c) por</div>
-                    <div class="option" data-value="3">d) sin</div>
-                </div>
-                <div class="explanation">"En" indica ubicación o posición</div>
-            </div>
-
-            <button class="submit-btn" onclick="checkAnswers()">Verificar Respuestas</button>
-            <div id="result"></div>
+      <div class="question" data-answer="1">
+        <div class="question-number">
+          Pregunta 1. Lee el texto y selecciona la respuesta correcta:
         </div>
+        <div class="reading-passage">
+          Hola, me llamo María. Tengo 25 años y soy profesora. Vivo en Madrid con
+          mi hermana.
+          <br />
+          Me gusta leer libros y ver películas. Los fines de semana voy al parque
+          con mis amigos.
+        </div>
+        <div><strong>¿Cuál es la profesión de María?</strong></div>
+        <div class="options">
+          <div class="option" data-value="0">a) Estudiante</div>
+          <div class="option" data-value="1">b) Profesora</div>
+          <div class="option" data-value="2">c) Doctora</div>
+          <div class="option" data-value="3">d) Enfermera</div>
+        </div>
+        <div class="explanation">El texto dice claramente "soy profesora"</div>
+      </div>
 
-        <script>
-            let answered = {};
+      <div class="question" data-answer="2">
+        <div class="question-number">Pregunta 2. Según el texto anterior:</div>
+        <div><strong>¿Con quién vive María?</strong></div>
+        <div class="options">
+          <div class="option" data-value="0">a) Con sus padres</div>
+          <div class="option" data-value="1">b) Sola</div>
+          <div class="option" data-value="2">c) Con su hermana</div>
+          <div class="option" data-value="3">d) Con sus amigos</div>
+        </div>
+        <div class="explanation">El texto menciona "Vivo en Madrid con mi hermana"</div>
+      </div>
 
-            document.querySelectorAll('.option').forEach(option => {
-                option.addEventListener('click', function() {
-                    const question = this.closest('.question');
-                    const questionNum = Array.from(document.querySelectorAll('.question')).indexOf(question);
+      <div class="section-header">CONOCIMIENTOS DE LA LENGUA</div>
 
-                    question.querySelectorAll('.option').forEach(opt => {
-                        opt.classList.remove('selected');
-                    });
+      <div class="question" data-answer="0">
+        <div class="question-number">Pregunta 3. Completa la frase:</div>
+        <div class="spanish">Yo _____ estudiante de español.</div>
+        <div class="options">
+          <div class="option" data-value="0">a) soy</div>
+          <div class="option" data-value="1">b) es</div>
+          <div class="option" data-value="2">c) son</div>
+          <div class="option" data-value="3">d) eres</div>
+        </div>
+        <div class="explanation">
+          Con "yo" se usa "soy" (primera persona singular del verbo ser)
+        </div>
+      </div>
 
-                    this.classList.add('selected');
-                    answered[questionNum] = parseInt(this.dataset.value);
-                });
-            });
+      <div class="question" data-answer="1">
+        <div class="question-number">Pregunta 4. Selecciona la forma correcta:</div>
+        <div class="spanish">Nosotros _____ en casa.</div>
+        <div class="options">
+          <div class="option" data-value="0">a) está</div>
+          <div class="option" data-value="1">b) estamos</div>
+          <div class="option" data-value="2">c) están</div>
+          <div class="option" data-value="3">d) estás</div>
+        </div>
+        <div class="explanation">
+          "Estamos" es la forma correcta para "nosotros" del verbo estar
+        </div>
+      </div>
 
-            function checkAnswers() {
-                let correct = 0;
-                const questions = document.querySelectorAll('.question');
+      <div class="question" data-answer="2">
+        <div class="question-number">
+          Pregunta 5. ¿Cuál es el plural de "el niño"?
+        </div>
+        <div class="options">
+          <div class="option" data-value="0">a) los niña</div>
+          <div class="option" data-value="1">b) las niños</div>
+          <div class="option" data-value="2">c) los niños</div>
+          <div class="option" data-value="3">d) el niños</div>
+        </div>
+        <div class="explanation">El plural masculino es "los niños"</div>
+      </div>
 
-                questions.forEach((question, index) => {
-                    const correctAnswer = parseInt(question.dataset.answer);
-                    const userAnswer = answered[index];
-                    const options = question.querySelectorAll('.option');
-                    const explanation = question.querySelector('.explanation');
+      <div class="question" data-answer="0">
+        <div class="question-number">
+          Pregunta 6. Completa con el artículo correcto:
+        </div>
+        <div class="spanish">_____ mesa es grande.</div>
+        <div class="options">
+          <div class="option" data-value="0">a) La</div>
+          <div class="option" data-value="1">b) El</div>
+          <div class="option" data-value="2">c) Los</div>
+          <div class="option" data-value="3">d) Las</div>
+        </div>
+        <div class="explanation">
+          "Mesa" es femenino singular, por eso usa "la"
+        </div>
+      </div>
 
-                    options.forEach((option, optIndex) => {
-                        option.classList.remove('selected');
-                        if (optIndex === correctAnswer) {
-                            option.classList.add('correct');
-                        } else if (optIndex === userAnswer && userAnswer !== correctAnswer) {
-                            option.classList.add('incorrect');
-                        }
-                    });
+      <div class="question" data-answer="3">
+        <div class="question-number">Pregunta 7. ¿Qué hora es?</div>
+        <div class="spanish">2:30</div>
+        <div class="options">
+          <div class="option" data-value="0">a) Son las dos y cuarto</div>
+          <div class="option" data-value="1">b) Son las tres menos cuarto</div>
+          <div class="option" data-value="2">c) Son las dos en punto</div>
+          <div class="option" data-value="3">d) Son las dos y media</div>
+        </div>
+        <div class="explanation">"Y media" significa 30 minutos después</div>
+      </div>
 
-                    if (userAnswer === correctAnswer) {
-                        correct++;
-                    }
+      <div class="question" data-answer="1">
+        <div class="question-number">Pregunta 8. Selecciona la respuesta correcta:</div>
+        <div class="spanish">¿De dónde eres?</div>
+        <div class="options">
+          <div class="option" data-value="0">a) Tengo 20 años</div>
+          <div class="option" data-value="1">b) Soy de México</div>
+          <div class="option" data-value="2">c) Me llamo Juan</div>
+          <div class="option" data-value="3">d) Estoy bien</div>
+        </div>
+        <div class="explanation">
+          La pregunta sobre origen se responde con "Soy de..."
+        </div>
+      </div>
 
-                    explanation.style.display = 'block';
-                });
+      <div class="question" data-answer="2">
+        <div class="question-number">
+          Pregunta 9. ¿Cuál es la forma correcta del presente?
+        </div>
+        <div class="spanish">Ella _____ todos los días.</div>
+        <div class="options">
+          <div class="option" data-value="0">a) estudiar</div>
+          <div class="option" data-value="1">b) estudias</div>
+          <div class="option" data-value="2">c) estudia</div>
+          <div class="option" data-value="3">d) estudiamos</div>
+        </div>
+        <div class="explanation">
+          "Estudia" es la tercera persona singular de "estudiar"
+        </div>
+      </div>
 
-                const percentage = Math.round((correct / questions.length) * 100);
-                const resultDiv = document.getElementById('result');
+      <div class="question" data-answer="0">
+        <div class="question-number">
+          Pregunta 10. Selecciona la preposición correcta:
+        </div>
+        <div class="spanish">El libro está _____ la mesa.</div>
+        <div class="options">
+          <div class="option" data-value="0">a) en</div>
+          <div class="option" data-value="1">b) con</div>
+          <div class="option" data-value="2">c) por</div>
+          <div class="option" data-value="3">d) sin</div>
+        </div>
+        <div class="explanation">"En" indica ubicación o posición</div>
+      </div>
 
-                if (percentage >= 65) {
-                    resultDiv.innerHTML = `
-                        <div class="result pass">
-                            ¡Excelente! ${correct}/${questions.length} correctas (${percentage}%)
-                            <br>¡Aprobado! Estás listo para el DELE A1
-                        </div>
-                    `;
-                } else {
-                    resultDiv.innerHTML = `
-                        <div class="result fail">
-                            Sigue practicando: ${correct}/${questions.length} correctas (${percentage}%)
-                            <br>Necesitas 65% para aprobar el DELE A1
-                        </div>
-                    `;
-                }
+      <button class="submit-btn" onclick="checkAnswers()">Verificar Respuestas</button>
+      <div id="result"></div>
+    </div>
 
-                document.querySelector('.submit-btn').disabled = true;
+    <script>
+      let answered = {};
+
+      document.querySelectorAll('.option').forEach((option) => {
+        option.addEventListener('click', function () {
+          const question = this.closest('.question');
+          const questionNum = Array.from(document.querySelectorAll('.question')).indexOf(
+            question
+          );
+
+          question.querySelectorAll('.option').forEach((opt) => opt.classList.remove('selected'));
+
+          this.classList.add('selected');
+          answered[questionNum] = parseInt(this.dataset.value);
+        });
+      });
+
+      function checkAnswers() {
+        let correct = 0;
+        const questions = document.querySelectorAll('.question');
+
+        questions.forEach((question, index) => {
+          const correctAnswer = parseInt(question.dataset.answer);
+          const userAnswer = answered[index];
+          const options = question.querySelectorAll('.option');
+          const explanation = question.querySelector('.explanation');
+
+          options.forEach((option, optIndex) => {
+            option.classList.remove('selected');
+            if (optIndex === correctAnswer) {
+              option.classList.add('correct');
+            } else if (optIndex === userAnswer && userAnswer !== correctAnswer) {
+              option.classList.add('incorrect');
             }
-        </script>
-    </body>
+          });
+
+          if (userAnswer === correctAnswer) {
+            correct++;
+          }
+
+          explanation.style.display = 'block';
+        });
+
+        const percentage = Math.round((correct / questions.length) * 100);
+        const resultDiv = document.getElementById('result');
+
+        if (percentage >= 65) {
+          resultDiv.innerHTML = `
+            <div class="result pass">
+              ¡Excelente! ${correct}/${questions.length} correctas (${percentage}%)
+              <br>¡Aprobado! Estás listo para el DELE A1
+            </div>
+          `;
+        } else {
+          resultDiv.innerHTML = `
+            <div class="result fail">
+              Sigue practicando: ${correct}/${questions.length} correctas (${percentage}%)
+              <br>Necesitas 65% para aprobar el DELE A1
+            </div>
+          `;
+        }
+
+        document.querySelector('.submit-btn').disabled = true;
+      }
+    </script>
+  </body>
 </html>
