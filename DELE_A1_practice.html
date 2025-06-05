@@ -158,20 +158,23 @@
             font-size: 1em;
             line-height: 1.4;
         }
+        /* Media query for narrow screens */
         @media screen and (max-width: 600px) {
-            .question-number {
-            font-size: 1em;
-            margin-bottom: 10px;
-        }
-        .reading-passage {
-            padding: 8px 10px;
-            margin: 8px 0;
-        }
-        .options .option {
-            font-size: 0.95em;
-            padding: 10px 12px;
-        }
-        }
+                .question-number {
+                    font-size: 1em;
+                    margin-bottom: 10px;
+                }
+                .reading-passage {
+                    /* Even tighter padding/margin on small phones */
+                    padding: 8px 10px;
+                    margin: 8px 0;
+                }
+                .options .option {
+                    /* Slightly shrink each answer choice */
+                    font-size: 0.95em;
+                    padding: 10px 12px;
+                }
+            }
     </style>
 </head>
 <body>
