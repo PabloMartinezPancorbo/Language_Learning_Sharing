@@ -1,1 +1,1120 @@
-https://claude.ai/public/artifacts/f45a9635-b341-49a2-b0bb-131da2b9ce73
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JLPT N5/N4 Complete Reference Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        h1 {
+            font-size: 3.5em;
+            margin-bottom: 15px;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            font-size: 1.3em;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 30px;
+        }
+
+        .main-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .level-button {
+            padding: 20px 60px;
+            background: rgba(255, 255, 255, 0.95);
+            border: none;
+            border-radius: 15px;
+            color: #333;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.8em;
+            font-weight: bold;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .level-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s;
+        }
+
+        .level-button:hover::before {
+            left: 100%;
+        }
+
+        .level-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        .level-button.active {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        .level-description {
+            font-size: 0.5em;
+            font-weight: normal;
+            display: block;
+            margin-top: 5px;
+        }
+
+        .level-content {
+            display: none;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .level-content.active {
+            display: block;
+        }
+
+        .content-tabs {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 15px;
+        }
+
+        .content-tab {
+            padding: 10px 25px;
+            background: transparent;
+            border: 2px solid transparent;
+            border-radius: 25px;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1em;
+        }
+
+        .content-tab:hover {
+            background: rgba(0,0,0,0.05);
+            color: #333;
+        }
+
+        .content-tab.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: transparent;
+        }
+
+        .tab-panel {
+            display: none;
+        }
+
+        .tab-panel.active {
+            display: block;
+        }
+
+        .word-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            padding: 20px 0;
+        }
+
+        .word-card {
+            background: white;
+            border: 2px solid #f0f0f0;
+            border-radius: 12px;
+            padding: 25px 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .word-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            opacity: 0;
+        }
+
+        .word-card:hover::after {
+            opacity: 1;
+            width: 150px;
+            height: 150px;
+        }
+
+        .word-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            border-color: #667eea;
+        }
+
+        .kanji-char {
+            font-size: 3em;
+            margin-bottom: 10px;
+            color: #333;
+            font-weight: bold;
+            line-height: 1;
+        }
+
+        .word-main {
+            font-size: 2em;
+            margin-bottom: 10px;
+            color: #444;
+            font-weight: 600;
+        }
+
+        .romaji {
+            font-size: 1.2em;
+            color: #667eea;
+            margin-bottom: 10px;
+            font-weight: 500;
+            font-style: italic;
+        }
+
+        .meaning {
+            font-size: 1.1em;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        .stats-bar {
+            background: rgba(255,255,255,0.9);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 10px 20px;
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 1em;
+            margin-top: 5px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .search-box {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto 30px;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 30px;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.2);
+        }
+
+        .display-options {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .toggle-romaji {
+            padding: 10px 20px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-romaji:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+        }
+
+        .hide-romaji .romaji {
+            display: none;
+        }
+
+        .kana-pair {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 10px;
+        }
+
+        .kana-char {
+            font-size: 2.5em;
+            font-weight: 500;
+        }
+
+        .hiragana {
+            color: #f5576c;
+        }
+
+        .katakana {
+            color: #4ecdc4;
+        }
+
+        .kana-type-label {
+            font-size: 0.8em;
+            color: #999;
+            margin-top: 5px;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5em;
+            }
+            .word-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 15px;
+            }
+            .level-button {
+                padding: 15px 40px;
+                font-size: 1.4em;
+            }
+            .kanji-char {
+                font-size: 2.5em;
+            }
+            .word-main {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>JLPT Complete Study Guide</h1>
+            <p class="subtitle">Master Japanese Language Proficiency Test Vocabulary & Kanji</p>
+        </header>
+
+        <div class="stats-bar">
+            <div class="stat-item">
+                <div class="stat-number">300+</div>
+                <div class="stat-label">Total Items</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">3</div>
+                <div class="stat-label">Study Sections</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Coverage</div>
+            </div>
+        </div>
+
+        <div class="main-tabs">
+            <button class="level-button active" onclick="showLevel('kana')">
+                Kana
+                <span class="level-description">Hiragana & Katakana</span>
+            </button>
+            <button class="level-button" onclick="showLevel('n5')">
+                JLPT N5
+                <span class="level-description">Beginner Level</span>
+            </button>
+            <button class="level-button" onclick="showLevel('n4')">
+                JLPT N4
+                <span class="level-description">Elementary Level</span>
+            </button>
+        </div>
+
+        <!-- Kana Content -->
+        <div id="kana" class="level-content active">
+            <div class="display-options">
+                <button class="toggle-romaji" onclick="toggleRomaji('kana')">Toggle Romaji Display</button>
+            </div>
+            
+            <div class="search-box">
+                <input type="text" class="search-input" placeholder="Search hiragana, katakana, or romaji..." onkeyup="searchWords('kana', this.value)">
+            </div>
+            
+            <div class="content-tabs">
+                <button class="content-tab active" onclick="showKanaTab('basic')">Basic Kana</button>
+                <button class="content-tab" onclick="showKanaTab('dakuten')">Dakuten & Handakuten</button>
+                <button class="content-tab" onclick="showKanaTab('combo')">Combination Kana</button>
+                <button class="content-tab" onclick="showKanaTab('all')">All Kana</button>
+            </div>
+
+            <div id="kana-basic" class="tab-panel active">
+                <div class="word-grid"></div>
+            </div>
+
+            <div id="kana-dakuten" class="tab-panel">
+                <div class="word-grid"></div>
+            </div>
+
+            <div id="kana-combo" class="tab-panel">
+                <div class="word-grid"></div>
+            </div>
+
+            <div id="kana-all" class="tab-panel">
+                <div class="word-grid"></div>
+            </div>
+        </div>
+
+        <!-- N5 Content -->
+        <div id="n5" class="level-content">
+            <div class="display-options">
+                <button class="toggle-romaji" onclick="toggleRomaji('n5')">Toggle Romaji Display</button>
+            </div>
+            
+            <div class="search-box">
+                <input type="text" class="search-input" placeholder="Search N5 vocabulary, kanji, or romaji..." onkeyup="searchWords('n5', this.value)">
+            </div>
+            
+            <div class="content-tabs">
+                <button class="content-tab active" onclick="showN5Tab('kanji')">Kanji</button>
+                <button class="content-tab" onclick="showN5Tab('vocabulary')">Core Vocabulary</button>
+                <button class="content-tab" onclick="showN5Tab('all')">All N5 Items</button>
+            </div>
+
+            <div id="n5-kanji" class="tab-panel active">
+                <div class="word-grid"></div>
+            </div>
+
+            <div id="n5-vocabulary" class="tab-panel">
+                <div class="word-grid"></div>
+            </div>
+
+            <div id="n5-all" class="tab-panel">
+                <div class="word-grid"></div>
+            </div>
+        </div>
+
+        <!-- N4 Content -->
+        <div id="n4" class="level-content">
+            <div class="display-options">
+                <button class="toggle-romaji" onclick="toggleRomaji('n4')">Toggle Romaji Display</button>
+            </div>
+            
+            <div class="search-box">
+                <input type="text" class="search-input" placeholder="Search N4 vocabulary, kanji, or romaji..." onkeyup="searchWords('n4', this.value)">
+            </div>
+            
+            <div class="content-tabs">
+                <button class="content-tab active" onclick="showN4Tab('kanji')">Kanji</button>
+                <button class="content-tab" onclick="showN4Tab('vocabulary')">Advanced Vocabulary</button>
+                <button class="content-tab" onclick="showN4Tab('all')">All N4 Items</button>
+            </div>
+
+            <div id="n4-kanji" class="tab-panel active">
+                <div class="word-grid"></div>
+            </div>
+
+            <div id="n4-vocabulary" class="tab-panel">
+                <div class="word-grid"></div>
+            </div>
+
+            <div id="n4-all" class="tab-panel">
+                <div class="word-grid"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const kanaData = {
+            basic: [
+                // Vowels
+                {hiragana: "あ", katakana: "ア", romaji: "a"},
+                {hiragana: "い", katakana: "イ", romaji: "i"},
+                {hiragana: "う", katakana: "ウ", romaji: "u"},
+                {hiragana: "え", katakana: "エ", romaji: "e"},
+                {hiragana: "お", katakana: "オ", romaji: "o"},
+                // K row
+                {hiragana: "か", katakana: "カ", romaji: "ka"},
+                {hiragana: "き", katakana: "キ", romaji: "ki"},
+                {hiragana: "く", katakana: "ク", romaji: "ku"},
+                {hiragana: "け", katakana: "ケ", romaji: "ke"},
+                {hiragana: "こ", katakana: "コ", romaji: "ko"},
+                // S row
+                {hiragana: "さ", katakana: "サ", romaji: "sa"},
+                {hiragana: "し", katakana: "シ", romaji: "shi"},
+                {hiragana: "す", katakana: "ス", romaji: "su"},
+                {hiragana: "せ", katakana: "セ", romaji: "se"},
+                {hiragana: "そ", katakana: "ソ", romaji: "so"},
+                // T row
+                {hiragana: "た", katakana: "タ", romaji: "ta"},
+                {hiragana: "ち", katakana: "チ", romaji: "chi"},
+                {hiragana: "つ", katakana: "ツ", romaji: "tsu"},
+                {hiragana: "て", katakana: "テ", romaji: "te"},
+                {hiragana: "と", katakana: "ト", romaji: "to"},
+                // N row
+                {hiragana: "な", katakana: "ナ", romaji: "na"},
+                {hiragana: "に", katakana: "ニ", romaji: "ni"},
+                {hiragana: "ぬ", katakana: "ヌ", romaji: "nu"},
+                {hiragana: "ね", katakana: "ネ", romaji: "ne"},
+                {hiragana: "の", katakana: "ノ", romaji: "no"},
+                // H row
+                {hiragana: "は", katakana: "ハ", romaji: "ha"},
+                {hiragana: "ひ", katakana: "ヒ", romaji: "hi"},
+                {hiragana: "ふ", katakana: "フ", romaji: "fu"},
+                {hiragana: "へ", katakana: "ヘ", romaji: "he"},
+                {hiragana: "ほ", katakana: "ホ", romaji: "ho"},
+                // M row
+                {hiragana: "ま", katakana: "マ", romaji: "ma"},
+                {hiragana: "み", katakana: "ミ", romaji: "mi"},
+                {hiragana: "む", katakana: "ム", romaji: "mu"},
+                {hiragana: "め", katakana: "メ", romaji: "me"},
+                {hiragana: "も", katakana: "モ", romaji: "mo"},
+                // Y row
+                {hiragana: "や", katakana: "ヤ", romaji: "ya"},
+                {hiragana: "ゆ", katakana: "ユ", romaji: "yu"},
+                {hiragana: "よ", katakana: "ヨ", romaji: "yo"},
+                // R row
+                {hiragana: "ら", katakana: "ラ", romaji: "ra"},
+                {hiragana: "り", katakana: "リ", romaji: "ri"},
+                {hiragana: "る", katakana: "ル", romaji: "ru"},
+                {hiragana: "れ", katakana: "レ", romaji: "re"},
+                {hiragana: "ろ", katakana: "ロ", romaji: "ro"},
+                // W row
+                {hiragana: "わ", katakana: "ワ", romaji: "wa"},
+                {hiragana: "を", katakana: "ヲ", romaji: "wo"},
+                // N
+                {hiragana: "ん", katakana: "ン", romaji: "n"}
+            ],
+            dakuten: [
+                // G row
+                {hiragana: "が", katakana: "ガ", romaji: "ga"},
+                {hiragana: "ぎ", katakana: "ギ", romaji: "gi"},
+                {hiragana: "ぐ", katakana: "グ", romaji: "gu"},
+                {hiragana: "げ", katakana: "ゲ", romaji: "ge"},
+                {hiragana: "ご", katakana: "ゴ", romaji: "go"},
+                // Z row
+                {hiragana: "ざ", katakana: "ザ", romaji: "za"},
+                {hiragana: "じ", katakana: "ジ", romaji: "ji"},
+                {hiragana: "ず", katakana: "ズ", romaji: "zu"},
+                {hiragana: "ぜ", katakana: "ゼ", romaji: "ze"},
+                {hiragana: "ぞ", katakana: "ゾ", romaji: "zo"},
+                // D row
+                {hiragana: "だ", katakana: "ダ", romaji: "da"},
+                {hiragana: "ぢ", katakana: "ヂ", romaji: "ji"},
+                {hiragana: "づ", katakana: "ヅ", romaji: "zu"},
+                {hiragana: "で", katakana: "デ", romaji: "de"},
+                {hiragana: "ど", katakana: "ド", romaji: "do"},
+                // B row
+                {hiragana: "ば", katakana: "バ", romaji: "ba"},
+                {hiragana: "び", katakana: "ビ", romaji: "bi"},
+                {hiragana: "ぶ", katakana: "ブ", romaji: "bu"},
+                {hiragana: "べ", katakana: "ベ", romaji: "be"},
+                {hiragana: "ぼ", katakana: "ボ", romaji: "bo"},
+                // P row
+                {hiragana: "ぱ", katakana: "パ", romaji: "pa"},
+                {hiragana: "ぴ", katakana: "ピ", romaji: "pi"},
+                {hiragana: "ぷ", katakana: "プ", romaji: "pu"},
+                {hiragana: "ぺ", katakana: "ペ", romaji: "pe"},
+                {hiragana: "ぽ", katakana: "ポ", romaji: "po"}
+            ],
+            combo: [
+                // Ya combinations
+                {hiragana: "きゃ", katakana: "キャ", romaji: "kya"},
+                {hiragana: "きゅ", katakana: "キュ", romaji: "kyu"},
+                {hiragana: "きょ", katakana: "キョ", romaji: "kyo"},
+                {hiragana: "しゃ", katakana: "シャ", romaji: "sha"},
+                {hiragana: "しゅ", katakana: "シュ", romaji: "shu"},
+                {hiragana: "しょ", katakana: "ショ", romaji: "sho"},
+                {hiragana: "ちゃ", katakana: "チャ", romaji: "cha"},
+                {hiragana: "ちゅ", katakana: "チュ", romaji: "chu"},
+                {hiragana: "ちょ", katakana: "チョ", romaji: "cho"},
+                {hiragana: "にゃ", katakana: "ニャ", romaji: "nya"},
+                {hiragana: "にゅ", katakana: "ニュ", romaji: "nyu"},
+                {hiragana: "にょ", katakana: "ニョ", romaji: "nyo"},
+                {hiragana: "ひゃ", katakana: "ヒャ", romaji: "hya"},
+                {hiragana: "ひゅ", katakana: "ヒュ", romaji: "hyu"},
+                {hiragana: "ひょ", katakana: "ヒョ", romaji: "hyo"},
+                {hiragana: "みゃ", katakana: "ミャ", romaji: "mya"},
+                {hiragana: "みゅ", katakana: "ミュ", romaji: "myu"},
+                {hiragana: "みょ", katakana: "ミョ", romaji: "myo"},
+                {hiragana: "りゃ", katakana: "リャ", romaji: "rya"},
+                {hiragana: "りゅ", katakana: "リュ", romaji: "ryu"},
+                {hiragana: "りょ", katakana: "リョ", romaji: "ryo"},
+                {hiragana: "ぎゃ", katakana: "ギャ", romaji: "gya"},
+                {hiragana: "ぎゅ", katakana: "ギュ", romaji: "gyu"},
+                {hiragana: "ぎょ", katakana: "ギョ", romaji: "gyo"},
+                {hiragana: "じゃ", katakana: "ジャ", romaji: "ja"},
+                {hiragana: "じゅ", katakana: "ジュ", romaji: "ju"},
+                {hiragana: "じょ", katakana: "ジョ", romaji: "jo"},
+                {hiragana: "びゃ", katakana: "ビャ", romaji: "bya"},
+                {hiragana: "びゅ", katakana: "ビュ", romaji: "byu"},
+                {hiragana: "びょ", katakana: "ビョ", romaji: "byo"},
+                {hiragana: "ぴゃ", katakana: "ピャ", romaji: "pya"},
+                {hiragana: "ぴゅ", katakana: "ピュ", romaji: "pyu"},
+                {hiragana: "ぴょ", katakana: "ピョ", romaji: "pyo"}
+            ]
+        };
+
+        const n5Data = {
+            kanji: [
+                {kanji: "安", romaji: "an", meaning: "peace; cheap; safe"},
+                {kanji: "一", romaji: "ichi", meaning: "one"},
+                {kanji: "飲", romaji: "in, no(mu)", meaning: "drink"},
+                {kanji: "右", romaji: "migi, u", meaning: "right"},
+                {kanji: "雨", romaji: "ame", meaning: "rain"},
+                {kanji: "駅", romaji: "eki", meaning: "station"},
+                {kanji: "円", romaji: "en", meaning: "yen; circle"},
+                {kanji: "火", romaji: "hi, ka", meaning: "fire"},
+                {kanji: "花", romaji: "hana", meaning: "flower"},
+                {kanji: "下", romaji: "shita, ka", meaning: "down; below"},
+                {kanji: "何", romaji: "nani, nan", meaning: "what"},
+                {kanji: "会", romaji: "a(u), kai", meaning: "meet"},
+                {kanji: "外", romaji: "soto, gai", meaning: "outside"},
+                {kanji: "学", romaji: "mana(bu), gaku", meaning: "study; learning"},
+                {kanji: "間", romaji: "aida, kan", meaning: "interval; space"},
+                {kanji: "気", romaji: "ki", meaning: "spirit; air"},
+                {kanji: "九", romaji: "kyū, ku", meaning: "nine"},
+                {kanji: "休", romaji: "yasu(mu), kyū", meaning: "rest"},
+                {kanji: "魚", romaji: "sakana, gyo", meaning: "fish"},
+                {kanji: "金", romaji: "kane, kin", meaning: "gold; money"},
+                {kanji: "空", romaji: "sora, kū", meaning: "sky; empty"},
+                {kanji: "月", romaji: "tsuki, getsu", meaning: "moon; month"},
+                {kanji: "見", romaji: "mi(ru), ken", meaning: "see"},
+                {kanji: "言", romaji: "i(u), gen", meaning: "say; word"},
+                {kanji: "古", romaji: "furu(i), ko", meaning: "old"},
+                {kanji: "五", romaji: "go", meaning: "five"},
+                {kanji: "後", romaji: "ato, go", meaning: "after; behind"},
+                {kanji: "午", romaji: "go", meaning: "noon"},
+                {kanji: "語", romaji: "go", meaning: "language; word"},
+                {kanji: "校", romaji: "kō", meaning: "school"},
+                {kanji: "口", romaji: "kuchi, kō", meaning: "mouth"},
+                {kanji: "行", romaji: "i(ku), kō", meaning: "go; act"},
+                {kanji: "高", romaji: "taka(i), kō", meaning: "tall; high"},
+                {kanji: "国", romaji: "kuni, koku", meaning: "country"},
+                {kanji: "今", romaji: "ima, kon", meaning: "now"},
+                {kanji: "左", romaji: "hidari, sa", meaning: "left"},
+                {kanji: "三", romaji: "san", meaning: "three"},
+                {kanji: "山", romaji: "yama, san", meaning: "mountain"},
+                {kanji: "四", romaji: "yon, shi", meaning: "four"},
+                {kanji: "子", romaji: "ko, shi", meaning: "child"},
+                {kanji: "耳", romaji: "mimi", meaning: "ear"},
+                {kanji: "時", romaji: "toki, ji", meaning: "time; hour"},
+                {kanji: "七", romaji: "nana, shichi", meaning: "seven"},
+                {kanji: "車", romaji: "kuruma, sha", meaning: "car"},
+                {kanji: "社", romaji: "sha", meaning: "shrine; company"},
+                {kanji: "手", romaji: "te, shu", meaning: "hand"},
+                {kanji: "週", romaji: "shū", meaning: "week"},
+                {kanji: "十", romaji: "jū", meaning: "ten"},
+                {kanji: "出", romaji: "de(ru), shutsu", meaning: "exit"},
+                {kanji: "書", romaji: "ka(ku), sho", meaning: "write; book"},
+                {kanji: "女", romaji: "onna, jo", meaning: "woman"},
+                {kanji: "小", romaji: "chii(sai), shō", meaning: "small"},
+                {kanji: "少", romaji: "suko(shi), shō", meaning: "few; little"},
+                {kanji: "上", romaji: "ue, jō", meaning: "up; above"},
+                {kanji: "食", romaji: "ta(beru), shoku", meaning: "eat"},
+                {kanji: "新", romaji: "atara(shii), shin", meaning: "new"},
+                {kanji: "人", romaji: "hito, jin", meaning: "person"},
+                {kanji: "水", romaji: "mizu, sui", meaning: "water"},
+                {kanji: "生", romaji: "i(kiru), sei", meaning: "life; birth"},
+                {kanji: "西", romaji: "nishi, sei", meaning: "west"},
+                {kanji: "川", romaji: "kawa, sen", meaning: "river"},
+                {kanji: "千", romaji: "sen", meaning: "thousand"},
+                {kanji: "先", romaji: "saki, sen", meaning: "previous"},
+                {kanji: "前", romaji: "mae, zen", meaning: "front; before"},
+                {kanji: "足", romaji: "ashi, soku", meaning: "foot; leg"},
+                {kanji: "多", romaji: "oo(i), ta", meaning: "many; much"},
+                {kanji: "大", romaji: "oo(kii), dai", meaning: "big"},
+                {kanji: "男", romaji: "otoko, dan", meaning: "man; male"},
+                {kanji: "中", romaji: "naka, chū", meaning: "middle; inside"},
+                {kanji: "長", romaji: "naga(i), chō", meaning: "long; leader"},
+                {kanji: "天", romaji: "ten", meaning: "heaven; sky"},
+                {kanji: "店", romaji: "mise, ten", meaning: "shop; store"},
+                {kanji: "電", romaji: "den", meaning: "electricity"},
+                {kanji: "土", romaji: "tsuchi, do", meaning: "soil; earth"},
+                {kanji: "東", romaji: "higashi, tō", meaning: "east"},
+                {kanji: "道", romaji: "michi, dō", meaning: "road; way"},
+                {kanji: "読", romaji: "yo(mu), doku", meaning: "read"},
+                {kanji: "南", romaji: "minami, nan", meaning: "south"},
+                {kanji: "二", romaji: "ni", meaning: "two"},
+                {kanji: "日", romaji: "hi, nichi", meaning: "sun; day"},
+                {kanji: "入", romaji: "hai(ru), nyū", meaning: "enter"},
+                {kanji: "年", romaji: "toshi, nen", meaning: "year"},
+                {kanji: "買", romaji: "ka(u), bai", meaning: "buy"},
+                {kanji: "白", romaji: "shiro(i), haku", meaning: "white"},
+                {kanji: "八", romaji: "hachi", meaning: "eight"},
+                {kanji: "半", romaji: "han", meaning: "half"},
+                {kanji: "百", romaji: "hyaku", meaning: "hundred"},
+                {kanji: "父", romaji: "chichi, fu", meaning: "father"},
+                {kanji: "分", romaji: "wa(karu), fun/bun", meaning: "minute; part"},
+                {kanji: "聞", romaji: "ki(ku), bun", meaning: "hear; listen"},
+                {kanji: "母", romaji: "haha, bo", meaning: "mother"},
+                {kanji: "北", romaji: "kita, hoku", meaning: "north"},
+                {kanji: "木", romaji: "ki, moku", meaning: "tree; wood"},
+                {kanji: "本", romaji: "hon", meaning: "book; origin"},
+                {kanji: "毎", romaji: "mai", meaning: "every"},
+                {kanji: "万", romaji: "man", meaning: "ten thousand"},
+                {kanji: "目", romaji: "me, moku", meaning: "eye"},
+                {kanji: "友", romaji: "tomo, yū", meaning: "friend"},
+                {kanji: "来", romaji: "ku(ru), rai", meaning: "come"},
+                {kanji: "立", romaji: "ta(tsu), ritsu", meaning: "stand"},
+                {kanji: "六", romaji: "roku", meaning: "six"},
+                {kanji: "話", romaji: "hana(su), wa", meaning: "talk; story"}
+            ],
+            vocabulary: [
+                {word: "名前", romaji: "namae", meaning: "name"}
+            ]
+        };
+
+        const n4Data = {
+            kanji: [
+                {kanji: "愛", romaji: "ai", meaning: "love"},
+                {kanji: "案", romaji: "an", meaning: "plan; proposal"},
+                {kanji: "以", romaji: "i", meaning: "by means of"},
+                {kanji: "意", romaji: "i", meaning: "meaning; mind"},
+                {kanji: "医", romaji: "i", meaning: "medicine; doctor"},
+                {kanji: "員", romaji: "in", meaning: "member"},
+                {kanji: "院", romaji: "in", meaning: "institution"},
+                {kanji: "運", romaji: "un", meaning: "carry; luck"},
+                {kanji: "泳", romaji: "oyo(gu), ei", meaning: "swim"},
+                {kanji: "央", romaji: "ō", meaning: "center"},
+                {kanji: "横", romaji: "yoko, ō", meaning: "side"},
+                {kanji: "屋", romaji: "ya", meaning: "roof; shop"},
+                {kanji: "温", romaji: "atata(kai), on", meaning: "warm"},
+                {kanji: "化", romaji: "ka", meaning: "change; transform"},
+                {kanji: "荷", romaji: "ni, ka", meaning: "luggage"},
+                {kanji: "界", romaji: "kai", meaning: "world; boundary"},
+                {kanji: "開", romaji: "a(keru), kai", meaning: "open"},
+                {kanji: "階", romaji: "kai", meaning: "story; floor"},
+                {kanji: "寒", romaji: "samu(i), kan", meaning: "cold"},
+                {kanji: "感", romaji: "kan", meaning: "feeling"},
+                {kanji: "漢", romaji: "kan", meaning: "China; Han"},
+                {kanji: "館", romaji: "kan", meaning: "building; hall"},
+                {kanji: "岸", romaji: "kishi, gan", meaning: "coast"},
+                {kanji: "起", romaji: "o(kiru), ki", meaning: "wake; rise"},
+                {kanji: "期", romaji: "ki", meaning: "period"},
+                {kanji: "客", romaji: "kyaku", meaning: "guest"},
+                {kanji: "究", romaji: "kyū", meaning: "research"},
+                {kanji: "急", romaji: "iso(gu), kyū", meaning: "hurry; sudden"},
+                {kanji: "級", romaji: "kyū", meaning: "rank"},
+                {kanji: "宮", romaji: "miya, kyū", meaning: "shrine; palace"},
+                {kanji: "球", romaji: "tama, kyū", meaning: "ball"},
+                {kanji: "去", romaji: "sa(ru), kyo", meaning: "leave"},
+                {kanji: "橋", romaji: "hashi, kyō", meaning: "bridge"},
+                {kanji: "業", romaji: "gyō", meaning: "business"},
+                {kanji: "曲", romaji: "ma(garu), kyoku", meaning: "bend; music"},
+                {kanji: "局", romaji: "kyoku", meaning: "bureau"},
+                {kanji: "銀", romaji: "gin", meaning: "silver"},
+                {kanji: "区", romaji: "ku", meaning: "ward"},
+                {kanji: "苦", romaji: "kuru(shii), ku", meaning: "suffer; bitter"},
+                {kanji: "具", romaji: "gu", meaning: "tool"},
+                {kanji: "君", romaji: "kimi, kun", meaning: "you (informal); ruler"},
+                {kanji: "係", romaji: "kakari, kei", meaning: "person in charge"},
+                {kanji: "軽", romaji: "karu(i), kei", meaning: "light"},
+                {kanji: "血", romaji: "chi, ketsu", meaning: "blood"},
+                {kanji: "決", romaji: "ki(meru), ketsu", meaning: "decide"},
+                {kanji: "研", romaji: "ken", meaning: "polish; study"},
+                {kanji: "県", romaji: "ken", meaning: "prefecture"},
+                {kanji: "庫", romaji: "ko", meaning: "warehouse"},
+                {kanji: "湖", romaji: "mizuumi, ko", meaning: "lake"},
+                {kanji: "向", romaji: "mu(kau), kō", meaning: "direction"},
+                {kanji: "幸", romaji: "shiawa(se), kō", meaning: "happiness"},
+                {kanji: "港", romaji: "minato, kō", meaning: "port"},
+                {kanji: "号", romaji: "gō", meaning: "number"},
+                {kanji: "根", romaji: "ne, kon", meaning: "root"},
+                {kanji: "祭", romaji: "matsu(ri), sai", meaning: "festival"},
+                {kanji: "皿", romaji: "sara", meaning: "dish; plate"},
+                {kanji: "仕", romaji: "tsuka(eru), shi", meaning: "serve"},
+                {kanji: "死", romaji: "shi(nu), shi", meaning: "death"},
+                {kanji: "使", romaji: "tsuka(u), shi", meaning: "use"},
+                {kanji: "始", romaji: "haji(meru), shi", meaning: "begin"},
+                {kanji: "指", romaji: "yubi, shi", meaning: "finger; point"},
+                {kanji: "歯", romaji: "ha, shi", meaning: "tooth"},
+                {kanji: "詩", romaji: "shi", meaning: "poem"},
+                {kanji: "次", romaji: "tsugi, ji", meaning: "next"},
+                {kanji: "事", romaji: "koto, ji", meaning: "thing; matter"},
+                {kanji: "持", romaji: "mo(tsu), ji", meaning: "hold"},
+                {kanji: "式", romaji: "shiki", meaning: "ceremony; style"},
+                {kanji: "実", romaji: "minoru, jitsu", meaning: "truth; fruit"},
+                {kanji: "写", romaji: "utsu(su), sha", meaning: "copy; photo"},
+                {kanji: "者", romaji: "mono, sha", meaning: "person"},
+                {kanji: "主", romaji: "nushi, shu", meaning: "main; master"},
+                {kanji: "守", romaji: "mamo(ru), shu", meaning: "protect"},
+                {kanji: "取", romaji: "to(ru), shu", meaning: "take"},
+                {kanji: "酒", romaji: "sake, shu", meaning: "alcohol"},
+                {kanji: "受", romaji: "u(keru), ju", meaning: "receive"},
+                {kanji: "州", romaji: "shū", meaning: "state; province"},
+                {kanji: "拾", romaji: "hiro(u), shū", meaning: "pick up"},
+                {kanji: "終", romaji: "o(waru), shū", meaning: "end"},
+                {kanji: "習", romaji: "nara(u), shū", meaning: "learn"},
+                {kanji: "集", romaji: "atsu(meru), shū", meaning: "collect"},
+                {kanji: "住", romaji: "su(mu), jū", meaning: "live; dwell"},
+                {kanji: "重", romaji: "omo(i), jū", meaning: "heavy; important"},
+                {kanji: "宿", romaji: "yado, shuku", meaning: "lodge"},
+                {kanji: "所", romaji: "tokoro, sho", meaning: "place"},
+                {kanji: "暑", romaji: "atsu(i), sho", meaning: "hot weather"},
+                {kanji: "助", romaji: "tasu(keru), jo", meaning: "help"},
+                {kanji: "昭", romaji: "shō", meaning: "bright"},
+                {kanji: "消", romaji: "ki(eru), shō", meaning: "extinguish"},
+                {kanji: "商", romaji: "shō", meaning: "commerce"},
+                {kanji: "章", romaji: "shō", meaning: "chapter"},
+                {kanji: "勝", romaji: "ka(tsu), shō", meaning: "win"},
+                {kanji: "乗", romaji: "no(ru), jō", meaning: "ride"},
+                {kanji: "植", romaji: "u(eru), shoku", meaning: "plant"},
+                {kanji: "申", romaji: "mō(su), shin", meaning: "say; extend"},
+                {kanji: "身", romaji: "mi, shin", meaning: "body"},
+                {kanji: "神", romaji: "kami, shin", meaning: "god; spirit"},
+                {kanji: "真", romaji: "ma, shin", meaning: "true"},
+                {kanji: "深", romaji: "fuka(i), shin", meaning: "deep"},
+                {kanji: "進", romaji: "susu(mu), shin", meaning: "advance"},
+                {kanji: "世", romaji: "yo, sei", meaning: "world; generation"}
+            ],
+            vocabulary: [
+                {word: "残る", romaji: "nokoru", meaning: "remain"},
+                {word: "紳士", romaji: "shinshi", meaning: "gentleman; samurai"},
+                {word: "名字", romaji: "myōji", meaning: "family name"},
+                {word: "試す", romaji: "tamesu", meaning: "test; try"},
+                {word: "歴史", romaji: "rekishi", meaning: "history"},
+                {word: "歯", romaji: "ha", meaning: "teeth"},
+                {word: "資源", romaji: "shigen", meaning: "resources"},
+                {word: "似る", romaji: "niru", meaning: "resemble"},
+                {word: "寺", romaji: "tera", meaning: "temple"},
+                {word: "治る", romaji: "naoru", meaning: "govern; cure"},
+                {word: "辞める", romaji: "yameru", meaning: "word; resign"},
+                {word: "失う", romaji: "ushinau", meaning: "lose"},
+                {word: "借りる", romaji: "kariru", meaning: "lend"},
+                {word: "若い", romaji: "wakai", meaning: "young"},
+                {word: "手術", romaji: "shujutsu", meaning: "surgery"},
+                {word: "趣味", romaji: "shumi", meaning: "hobby"},
+                {word: "酒", romaji: "sake", meaning: "sake; alcohol"},
+                {word: "受ける", romaji: "ukeru", meaning: "receive"},
+                {word: "授業", romaji: "jugyō", meaning: "class; lesson"},
+                {word: "周り", romaji: "mawari", meaning: "surroundings"},
+                {word: "住所", romaji: "jūsho", meaning: "address"},
+                {word: "拾う", romaji: "hirou", meaning: "pick up"},
+                {word: "集まる", romaji: "atsumaru", meaning: "gather"},
+                {word: "祝う", romaji: "iwau", meaning: "celebrate"},
+                {word: "順番", romaji: "junban", meaning: "order; turn"},
+                {word: "初めて", romaji: "hajimete", meaning: "for the first time"},
+                {word: "女性", romaji: "josei", meaning: "woman; female"},
+                {word: "勝つ", romaji: "katsu", meaning: "win"},
+                {word: "商売", romaji: "shōbai", meaning: "business; trade"},
+                {word: "将来", romaji: "shōrai", meaning: "future"},
+                {word: "小説", romaji: "shōsetsu", meaning: "novel"},
+                {word: "招待", romaji: "shōtai", meaning: "invitation"},
+                {word: "承知", romaji: "shōchi", meaning: "understanding; consent"},
+                {word: "紹介", romaji: "shōkai", meaning: "introduction"},
+                {word: "笑う", romaji: "warau", meaning: "laugh"},
+                {word: "焼く", romaji: "yaku", meaning: "bake; grill"},
+                {word: "焼ける", romaji: "yakeru", meaning: "be baked; be grilled"},
+                {word: "頂く", romaji: "itadaku", meaning: "receive (humble)"},
+                {word: "状態", romaji: "jōtai", meaning: "condition"},
+                {word: "場所", romaji: "basho", meaning: "place; location"},
+                {word: "条件", romaji: "jōken", meaning: "condition"},
+                {word: "娘", romaji: "musume", meaning: "daughter"},
+                {word: "情報", romaji: "jōhō", meaning: "information"},
+                {word: "畳", romaji: "tatami", meaning: "tatami mat"},
+                {word: "乗り換える", romaji: "norikaeru", meaning: "transfer (trains)"},
+                {word: "乗り物", romaji: "norimono", meaning: "vehicle"},
+                {word: "場合", romaji: "baai", meaning: "case; situation"},
+                {word: "食事", romaji: "shokuji", meaning: "meal"},
+                {word: "食料品", romaji: "shokuryōhin", meaning: "groceries"},
+                {word: "食欲", romaji: "shokuyoku", meaning: "appetite"},
+                {word: "植える", romaji: "ueru", meaning: "plant"},
+                {word: "色", romaji: "iro", meaning: "color"},
+                {word: "触る", romaji: "sawaru", meaning: "touch"},
+                {word: "心", romaji: "kokoro", meaning: "heart; mind"},
+                {word: "申し上げる", romaji: "mōshiageru", meaning: "say (humble)"},
+                {word: "申す", romaji: "mōsu", meaning: "say (humble)"},
+                {word: "伸びる", romaji: "nobiru", meaning: "stretch; grow"},
+                {word: "寝坊", romaji: "nebō", meaning: "oversleep"},
+                {word: "寝室", romaji: "shinshitsu", meaning: "bedroom"},
+                {word: "深い", romaji: "fukai", meaning: "deep"},
+                {word: "進む", romaji: "susumu", meaning: "advance; proceed"},
+                {word: "森", romaji: "mori", meaning: "forest"},
+                {word: "真ん中", romaji: "mannaka", meaning: "center; middle"},
+                {word: "神社", romaji: "jinja", meaning: "shrine"},
+                {word: "親", romaji: "oya", meaning: "parent"},
+                {word: "親切", romaji: "shinsetsu", meaning: "kind"},
+                {word: "身", romaji: "mi", meaning: "body"},
+                {word: "辛い", romaji: "tsurai/karai", meaning: "spicy; tough"},
+                {word: "新聞社", romaji: "shinbunsha", meaning: "newspaper company"},
+                {word: "心配", romaji: "shinpai", meaning: "worry"},
+                {word: "信じる", romaji: "shinjiru", meaning: "believe"},
+                {word: "信号", romaji: "shingō", meaning: "signal; traffic light"},
+                {word: "診察", romaji: "shinsatsu", meaning: "medical examination"},
+                {word: "身長", romaji: "shinchō", meaning: "height"},
+                {word: "身分", romaji: "mibun", meaning: "social status"},
+                {word: "寝台", romaji: "shindai", meaning: "bed; berth"},
+                {word: "震える", romaji: "furueru", meaning: "tremble"},
+                {word: "人口", romaji: "jinkō", meaning: "population"},
+                {word: "人生", romaji: "jinsei", meaning: "life"},
+                {word: "人形", romaji: "ningyō", meaning: "doll"},
+                {word: "水泳", romaji: "suiei", meaning: "swimming"},
+                {word: "水準", romaji: "suijun", meaning: "level; standard"},
+                {word: "水道", romaji: "suidō", meaning: "water supply"},
+                {word: "数", romaji: "kazu", meaning: "number"},
+                {word: "数字", romaji: "sūji", meaning: "numeral"},
+                {word: "数学", romaji: "sūgaku", meaning: "mathematics"},
+                {word: "姿", romaji: "sugata", meaning: "figure; appearance"},
+                {word: "過ぎる", romaji: "sugiru", meaning: "pass; exceed"},
+                {word: "凄い", romaji: "sugoi", meaning: "amazing"},
+                {word: "進む", romaji: "susumu", meaning: "advance"}
+            ]
+        };
+
+        function createKanaCard(item) {
+            return `
+                <div class="word-card">
+                    <div class="kana-pair">
+                        <div>
+                            <div class="kana-char hiragana">${item.hiragana}</div>
+                            <div class="kana-type-label">Hiragana</div>
+                        </div>
+                        <div>
+                            <div class="kana-char katakana">${item.katakana}</div>
+                            <div class="kana-type-label">Katakana</div>
+                        </div>
+                    </div>
+                    <div class="romaji">${item.romaji}</div>
+                </div>
+            `;
+        }
+
+        function createKanjiCard(item) {
+            return `
+                <div class="word-card">
+                    <div class="kanji-char">${item.kanji}</div>
+                    <div class="romaji">${item.romaji}</div>
+                    <div class="meaning">${item.meaning}</div>
+                </div>
+            `;
+        }
+
+        function createWordCard(item) {
+            return `
+                <div class="word-card">
+                    <div class="word-main">${item.word}</div>
+                    <div class="romaji">${item.romaji}</div>
+                    <div class="meaning">${item.meaning}</div>
+                </div>
+            `;
+        }
+
+        function populateContent() {
+            // Kana Content
+            document.querySelector('#kana-basic .word-grid').innerHTML = 
+                kanaData.basic.map(item => createKanaCard(item)).join('');
+            
+            document.querySelector('#kana-dakuten .word-grid').innerHTML = 
+                kanaData.dakuten.map(item => createKanaCard(item)).join('');
+            
+            document.querySelector('#kana-combo .word-grid').innerHTML = 
+                kanaData.combo.map(item => createKanaCard(item)).join('');
+            
+            document.querySelector('#kana-all .word-grid').innerHTML = 
+                kanaData.basic.map(item => createKanaCard(item)).join('') +
+                kanaData.dakuten.map(item => createKanaCard(item)).join('') +
+                kanaData.combo.map(item => createKanaCard(item)).join('');
+
+            // N5 Content
+            document.querySelector('#n5-kanji .word-grid').innerHTML = 
+                n5Data.kanji.map(item => createKanjiCard(item)).join('');
+            
+            document.querySelector('#n5-vocabulary .word-grid').innerHTML = 
+                n5Data.vocabulary.map(item => createWordCard(item)).join('');
+            
+            document.querySelector('#n5-all .word-grid').innerHTML = 
+                n5Data.kanji.map(item => createKanjiCard(item)).join('') +
+                n5Data.vocabulary.map(item => createWordCard(item)).join('');
+
+            // N4 Content
+            document.querySelector('#n4-kanji .word-grid').innerHTML = 
+                n4Data.kanji.map(item => createKanjiCard(item)).join('');
+            
+            document.querySelector('#n4-vocabulary .word-grid').innerHTML = 
+                n4Data.vocabulary.map(item => createWordCard(item)).join('');
+            
+            document.querySelector('#n4-all .word-grid').innerHTML = 
+                n4Data.kanji.map(item => createKanjiCard(item)).join('') +
+                n4Data.vocabulary.map(item => createWordCard(item)).join('');
+        }
+
+        function showLevel(level) {
+            // Hide all levels
+            document.querySelectorAll('.level-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remove active class from all buttons
+            document.querySelectorAll('.level-button').forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            // Show selected level
+            document.getElementById(level).classList.add('active');
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+
+        function showKanaTab(tabName) {
+            // Hide all Kana tabs
+            document.querySelectorAll('#kana .tab-panel').forEach(panel => {
+                panel.classList.remove('active');
+            });
+            
+            // Remove active class from all Kana tab buttons
+            document.querySelectorAll('#kana .content-tab').forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            // Show selected tab
+            document.getElementById(`kana-${tabName}`).classList.add('active');
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+
+        function showN5Tab(tabName) {
+            // Hide all N5 tabs
+            document.querySelectorAll('#n5 .tab-panel').forEach(panel => {
+                panel.classList.remove('active');
+            });
+            
+            // Remove active class from all N5 tab buttons
+            document.querySelectorAll('#n5 .content-tab').forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            // Show selected tab
+            document.getElementById(`n5-${tabName}`).classList.add('active');
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+
+        function showN4Tab(tabName) {
+            // Hide all N4 tabs
+            document.querySelectorAll('#n4 .tab-panel').forEach(panel => {
+                panel.classList.remove('active');
+            });
+            
+            // Remove active class from all N4 tab buttons
+            document.querySelectorAll('#n4 .content-tab').forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            // Show selected tab
+            document.getElementById(`n4-${tabName}`).classList.add('active');
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+
+        function searchWords(level, searchTerm) {
+            const term = searchTerm.toLowerCase();
+            const cards = document.querySelectorAll(`#${level} .word-card`);
+            
+            cards.forEach(card => {
+                const text = card.textContent.toLowerCase();
+                if (text.includes(term)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function toggleRomaji(level) {
+            const levelContent = document.getElementById(level);
+            levelContent.classList.toggle('hide-romaji');
+            
+            const button = event.target;
+            if (levelContent.classList.contains('hide-romaji')) {
+                button.textContent = 'Show Romaji';
+            } else {
+                button.textContent = 'Toggle Romaji Display';
+            }
+        }
+
+        // Initialize the page
+        populateContent();
+    </script>
+</body>
+</html>
