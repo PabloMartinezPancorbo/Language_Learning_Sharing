@@ -1,164 +1,499 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ultimate JLPT Master</title>
   <style>
+    /*──────────────────────────────────────────────────────────────────────────*/
+    /* Global Styles & Japanese Theme                                           */
+    /*──────────────────────────────────────────────────────────────────────────*/
     :root {
-      --japan-red: #bc002d; --bg-light: #f5f5f0; --text-dark: #2b2b2b;
-      --card-bg: #ffffff; --success: #27ae60; --danger: #e74c3c;
+      --japan-red: #bc002d;
+      --bg-light: #f5f5f0;
+      --text-dark: #2b2b2b;
+      --card-bg: #ffffff;
+      --success: #27ae60;
+      --danger: #e74c3c;
     }
-    body { font-family: 'Helvetica Neue', 'Meiryo', sans-serif; background-color: var(--bg-light); color: var(--text-dark); margin: 0; padding: 0; }
-    .app-container { max-width: 1000px; margin: 0 auto; padding: 20px; }
-    .tabs { display: flex; justify-content: center; gap: 10px; margin-bottom: 30px; }
-    .tab-btn { padding: 12px 20px; border: 2px solid var(--japan-red); background: transparent; color: var(--japan-red); border-radius: 8px; cursor: pointer; font-weight: bold; }
-    .tab-btn.active { background: var(--japan-red); color: white; }
+    
+    body {
+      font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic Pro', 'Meiryo', sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-dark);
+      margin: 0;
+      padding: 0;
+    }
+
+    .app-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    /*──────────────────────────────────────────────────────────────────────────*/
+    /* Navigation Tabs                                                          */
+    /*──────────────────────────────────────────────────────────────────────────*/
+    .tabs {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      padding: 12px 24px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      border: 2px solid var(--japan-red);
+      background: transparent;
+      color: var(--japan-red);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .tab-btn.active, .tab-btn:hover {
+      background: var(--japan-red);
+      color: white;
+    }
+
     .tab-content { display: none; }
-    .tab-content.active { display: block; animation: fadeIn 0.4s; }
+    .tab-content.active { display: block; animation: fadeIn 0.5s; }
+
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-    .study-card { background: var(--card-bg); padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-bottom: 20px;}
-    table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+
+    /*──────────────────────────────────────────────────────────────────────────*/
+    /* Section 1: Study Guide (Verbs)                                           */
+    /*──────────────────────────────────────────────────────────────────────────*/
+    .study-card {
+      background: var(--card-bg);
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      margin-bottom: 20px;
+    }
+
+    h2 { color: var(--japan-red); border-bottom: 2px solid var(--japan-red); padding-bottom: 10px; }
+    
+    .verb-group { margin-bottom: 30px; }
+    .verb-group h3 { background: #eee; padding: 10px; border-left: 5px solid var(--japan-red); }
+    
+    table { width: 100%; border-collapse: collapse; margin-top: 15px; }
     th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
-    th { background: #f9f9f9; color: var(--japan-red); }
-    .question-box { background: #fff; padding: 20px; border-radius: 8px; margin-bottom: 15px; border-left: 5px solid var(--japan-red); box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-    .opt-btn { width: 100%; padding: 12px; margin: 5px 0; border: 1px solid #ddd; border-radius: 6px; cursor: pointer; text-align: left; font-size: 1rem;}
+    th { background: #f9f9f9; }
+
+    /*──────────────────────────────────────────────────────────────────────────*/
+    /* Section 2: Mock Exams (JLPT Style)                                       */
+    /*──────────────────────────────────────────────────────────────────────────*/
+    .exam-header { text-align: center; margin-bottom: 20px; }
+    .level-selector { display: flex; justify-content: center; gap: 15px; margin-bottom: 20px; }
+    .level-btn { padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; background: #ddd; font-weight: bold;}
+    .level-btn.active { background: var(--text-dark); color: white; }
+
+    .jlpt-section { background: var(--text-dark); color: white; padding: 10px; margin: 20px 0; font-weight: bold; border-radius: 4px; }
+    
+    .question-box { background: var(--card-bg); padding: 20px; border-radius: 8px; margin-bottom: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-left: 4px solid var(--japan-red); }
+    .q-text { font-size: 1.2rem; margin-bottom: 15px; font-weight: bold; }
+    .q-subtext { font-size: 1rem; color: #555; margin-bottom: 15px; }
+    
+    .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .opt-btn { padding: 12px; border: 2px solid #eee; background: white; border-radius: 6px; cursor: pointer; font-size: 1rem; text-align: left; transition: 0.2s; }
     .opt-btn:hover { border-color: var(--japan-red); }
-    .opt-btn.selected { background: #ffecec; border-color: var(--japan-red); }
+    .opt-btn.selected { background: #ffe6e6; border-color: var(--japan-red); }
     .opt-btn.correct { background: var(--success); color: white; border-color: var(--success); }
     .opt-btn.wrong { background: var(--danger); color: white; border-color: var(--danger); }
-    .submit-exam { display: block; width: 200px; margin: 20px auto; padding: 15px; background: var(--japan-red); color: white; border: none; border-radius: 8px; font-size: 1.1rem; cursor: pointer; }
+
+    .submit-exam { display: block; width: 200px; margin: 30px auto; padding: 15px; background: var(--japan-red); color: white; border: none; border-radius: 8px; font-size: 1.2rem; cursor: pointer; }
+    .submit-exam:hover { background: #900020; }
+
+    /*──────────────────────────────────────────────────────────────────────────*/
+    /* Section 3: Games Hub                                                     */
+    /*──────────────────────────────────────────────────────────────────────────*/
+    .game-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+    .game-container { background: var(--card-bg); padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align: center; }
+    
+    /* Game 1: Chat */
+    .chat-window { height: 300px; background: #e5ddd5; border-radius: 10px; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; margin-bottom: 15px; }
+    .bubble { max-width: 70%; padding: 10px 15px; border-radius: 15px; font-size: 1rem; animation: popIn 0.3s; }
+    .bubble.npc { background: white; align-self: flex-start; border-bottom-left-radius: 0; }
+    .bubble.player { background: #dcf8c6; align-self: flex-end; border-bottom-right-radius: 0; }
+    .chat-options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    @keyframes popIn { 0% { transform: scale(0.8); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+
+    /* Game 2: Connect */
+    .connect-area { display: flex; justify-content: space-around; margin-top: 20px; }
+    .connect-col { display: flex; flex-direction: column; gap: 10px; width: 40%; }
+    .connect-item { padding: 15px; background: #f0f0f0; border: 2px solid #ccc; border-radius: 8px; cursor: pointer; font-size: 1.2rem; }
+    .connect-item.active { background: #fff0f0; border-color: var(--japan-red); }
+    .connect-item.matched { background: var(--success); color: white; border-color: var(--success); cursor: default; }
+
+    /* Game 3: Samurai Slash */
+    .slash-arena { height: 250px; background: #111; border-radius: 10px; position: relative; overflow: hidden; margin-bottom: 15px; }
+    .slash-prompt { color: white; font-size: 1.5rem; position: absolute; top: 10px; left: 50%; transform: translateX(-50%); }
+    .target-word { position: absolute; padding: 10px 20px; background: white; font-weight: bold; border-radius: 20px; cursor: crosshair; user-select: none; transition: transform 0.1s; }
+    .target-word:active { transform: scale(0.8); }
+    .slash-effect { position: absolute; background: white; height: 2px; width: 100px; transform: rotate(45deg); opacity: 0; pointer-events: none; }
+    @keyframes slashAnim { 0% { opacity: 1; transform: scale(1) rotate(45deg); } 100% { opacity: 0; transform: scale(2) rotate(45deg); } }
   </style>
 </head>
 <body>
-      <div class="app-container">
+  
+  <div class="app-container">
     <div class="tabs">
-      <button class="tab-btn active" onclick="switchTab('study')">📚 Verbs & Grammar</button>
+      <button class="tab-btn active" onclick="switchTab('study')">📚 Study: Verbs & Grammar</button>
       <button class="tab-btn" onclick="switchTab('exams')">📝 Mock Exams</button>
+      <button class="tab-btn" onclick="switchTab('games')">🎮 Game Hub</button>
     </div>
 
     <div id="study" class="tab-content active">
-      <div class="study-card" id="verb-content">
+      <div class="study-card">
+        <h2>The 3 Types of Japanese Verbs</h2>
+        <p>To master Japanese, you must know how to conjugate verbs into Dictionary form, Masu-form (polite), and Te-form (connecting). Japanese verbs are split into 3 groups based on their dictionary form endings.</p>
+        
+        <div class="verb-group">
+          <h3>Group 1: Godan Verbs (U-Verbs)</h3>
+          <p>These end in <i>u, tsu, ru, mu, nu, bu, ku, gu, su</i>. To make them polite (-masu), change the 'u' sound to an 'i' sound.</p>
+          <table>
+            <tr><th>Dictionary (Plain)</th><th>Romaji</th><th>Polite (-masu)</th><th>Te-Form</th><th>Meaning</th></tr>
+            <tr><td>書く</td><td>kaku</td><td>書きます (kakimasu)</td><td>書いて (kaite)</td><td>To write</td></tr>
+            <tr><td>飲む</td><td>nomu</td><td>飲みます (nomimasu)</td><td>飲んで (nonde)</td><td>To drink</td></tr>
+            <tr><td>話す</td><td>hanasu</td><td>話します (hanashimasu)</td><td>話して (hanashite)</td><td>To speak</td></tr>
+            <tr><td>行く</td><td>iku</td><td>行きます (ikimasu)</td><td>行って (itte) *Irregular te</td><td>To go</td></tr>
+          </table>
         </div>
+
+        <div class="verb-group">
+          <h3>Group 2: Ichidan Verbs (Ru-Verbs)</h3>
+          <p>These end in <i>-iru</i> or <i>-eru</i>. They are the easiest! Just drop the 'ru' and add the suffix.</p>
+          <table>
+            <tr><th>Dictionary (Plain)</th><th>Romaji</th><th>Polite (-masu)</th><th>Te-Form</th><th>Meaning</th></tr>
+            <tr><td>食べる</td><td>taberu</td><td>食べます (tabemasu)</td><td>食べて (tabete)</td><td>To eat</td></tr>
+            <tr><td>見る</td><td>miru</td><td>見ます (mimasu)</td><td>見て (mite)</td><td>To see/watch</td></tr>
+            <tr><td>起きる</td><td>okiru</td><td>起きます (okimasu)</td><td>起きて (okite)</td><td>To wake up</td></tr>
+          </table>
+        </div>
+
+        <div class="verb-group">
+          <h3>Group 3: Irregular Verbs</h3>
+          <p>There are only two main irregular verbs you must memorize entirely.</p>
+          <table>
+            <tr><th>Dictionary (Plain)</th><th>Romaji</th><th>Polite (-masu)</th><th>Te-Form</th><th>Meaning</th></tr>
+            <tr><td>する</td><td>suru</td><td>します (shimasu)</td><td>して (shite)</td><td>To do</td></tr>
+            <tr><td>来る</td><td>kuru</td><td>来ます (kimasu)</td><td>来て (kite)</td><td>To come</td></tr>
+          </table>
+        </div>
+      </div>
     </div>
 
     <div id="exams" class="tab-content">
       <div class="study-card">
-        <h2 style="text-align:center;">JLPT Mock Exams</h2>
-        <div style="display:flex; justify-content:center; gap:10px; margin-bottom:20px;">
-          <button class="tab-btn active" id="btn-n5" onclick="loadExam('N5')">N5 Exam</button>
-          <button class="tab-btn" id="btn-n4" onclick="loadExam('N4')">N4 Exam</button>
+        <h2 class="exam-header">日本語能力試験 - JLPT Mock Exams</h2>
+        <div class="level-selector">
+          <button class="level-btn active" onclick="loadExam('N5')">JLPT N5</button>
+          <button class="level-btn" onclick="loadExam('N4')">JLPT N4</button>
         </div>
-        <div id="exam-container"></div>
-        <button class="submit-exam" onclick="gradeExam()">Grade Exam</button>
-        <div id="exam-result" style="text-align: center; font-size: 1.2rem; font-weight: bold; margin-top:15px;"></div>
+        
+        <div id="exam-container">
+          </div>
+        <button class="submit-exam" onclick="gradeExam()">採点する (Grade Exam)</button>
+        <div id="exam-result" style="text-align: center; font-size: 1.5rem; margin-top: 20px; font-weight: bold;"></div>
       </div>
     </div>
+
+    <div id="games" class="tab-content">
+      <div class="game-grid">
+        
+        <div class="game-container">
+          <h2>💬 Game 1: Tokyo Chat Simulator</h2>
+          <p>Respond naturally. Choose the correct reply to keep the conversation going!</p>
+          <div class="chat-window" id="chat-window">
+            <div class="bubble npc">田中：こんにちは！週末はどこかへ行きましたか？</div>
+          </div>
+          <div class="chat-options" id="chat-options">
+            <button class="opt-btn" onclick="chatReply(false, this)">はい、行きます。</button>
+            <button class="opt-btn" onclick="chatReply(true, this)">京都へ行きました。</button>
+            <button class="opt-btn" onclick="chatReply(false, this)">何も食べませんでした。</button>
+            <button class="opt-btn" onclick="chatReply(false, this)">いいえ、行きましょう。</button>
+          </div>
+        </div>
+
+        <div class="game-container">
+          <h2>🔗 Game 2: Kanji to Furigana Connect</h2>
+          <p>Match the Kanji on the left to the correct reading on the right.</p>
+          <div class="connect-area" id="connect-area">
+            </div>
+        </div>
+
+        <div class="game-container">
+          <h2>⚔️ Game 3: Samurai Particle Slash</h2>
+          <p>Slash (click) the flying particle that correctly completes the sentence before it escapes!</p>
+          <button onclick="startSamuraiGame()" style="padding:10px; margin-bottom:10px; cursor:pointer;">Start Game</button>
+          <div class="slash-arena" id="slash-arena">
+            <div class="slash-prompt" id="slash-prompt">私はすし __ 食べます。</div>
+            </div>
+          <div id="slash-score">Score: 0</div>
+        </div>
+
+      </div>
     </div>
+  </div>
 
-      <script>
-    const JLPT_DATA = {
-      verbs: [
-        { group: "Group 1 (Godan - U verbs)", plain: "書く (kaku)", masu: "書きます", te: "書いて", meaning: "To write" },
-        { group: "Group 1 (Godan - U verbs)", plain: "飲む (nomu)", masu: "飲みます", te: "飲んで", meaning: "To drink" },
-        { group: "Group 2 (Ichidan - Ru verbs)", plain: "食べる (taberu)", masu: "食べます", te: "食べて", meaning: "To eat" },
-        { group: "Group 2 (Ichidan - Ru verbs)", plain: "見る (miru)", masu: "見ます", te: "見て", meaning: "To see" },
-        { group: "Group 3 (Irregular)", plain: "する (suru)", masu: "します", te: "して", meaning: "To do" },
-        { group: "Group 3 (Irregular)", plain: "来る (kuru)", masu: "来ます", te: "来て", meaning: "To come" }
-      ],
-      exams: {
-        N5: [
-          { q: "「新しい」の よみかたは どれですか。", options: ["あたらし", "あたらしい", "ふるい", "ふるいい"], ans: 1 },
-          { q: "わたしは 毎朝 コーヒーを ( )。", options: ["食べます", "見ます", "飲みます", "行きます"], ans: 2 },
-          { q: "つくえの 上 ( ) 本が あります。", options: ["に", "で", "を", "へ"], ans: 0 },
-          { q: "きのう、ともだちと えいがを ( )。", options: ["見ます", "見ました", "見て", "見ません"], ans: 1 }
-        ],
-        N4: [
-          { q: "この 「漢字」 は どう よみますか。", options: ["かんじ", "かんち", "ほんじ", "もじ"], ans: 0 },
-          { q: "あした 雨が ( )、ピクニックに 行きません。", options: ["降る", "降ったら", "降っても", "降りて"], ans: 1 },
-          { q: "先生は 私に 本を ( )。", options: ["あげました", "くれました", "もらいました", "かしました"], ans: 1 }
-        ]
-      }
-    };
-
-    let currentLevel = 'N5';
-
+    <script>
+    /*──────────────────────────────────────────────────────────────────────────*/
+    /* Global Navigation                                                        */
+    /*──────────────────────────────────────────────────────────────────────────*/
     function switchTab(tabId) {
       document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-      document.querySelectorAll('.tabs .tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
       document.getElementById(tabId).classList.add('active');
       event.currentTarget.classList.add('active');
     }
 
+    /*──────────────────────────────────────────────────────────────────────────*/
+    /* Mock Exam Engine                                                         */
+    /*──────────────────────────────────────────────────────────────────────────*/
+    const examData = {
+      N5: [
+        { section: "もじ・ごい (Vocabulary/Kanji)", q: "「新しい」の よみかたは どれですか。", options: ["あたらし", "あたらしい", "ふるい", "ふるいい"], ans: 1 },
+        { section: "もじ・ごい (Vocabulary/Kanji)", q: "わたしは 毎朝 コーヒーを ( )。", options: ["食べます", "見ます", "飲みます", "行きます"], ans: 2 },
+        { section: "ぶんぽう (Grammar)", q: "つくえの 上 ( ) 本が あります。", options: ["に", "で", "を", "へ"], ans: 0 },
+        { section: "ぶんぽう (Grammar)", q: "きのう、ともだちと えいがを ( )。", options: ["見ます", "見ました", "見て", "見ません"], ans: 1 },
+        { section: "どっかい (Reading)", subtext: "リーさん：マリアさん、その ペンは マリアさんの ですか。<br>マリア：いいえ、これは 先生の ペンです。", q: "だれの ペンですか。", options: ["リーさんの ペン", "マリアさんの ペン", "先生の ペン", "だれのものでもありません"], ans: 2 }
+      ],
+      N4: [
+        { section: "もじ・ごい (Vocabulary/Kanji)", q: "この 「漢字」 は どう よみますか。", options: ["かんじ", "かんち", "ほんじ", "もじ"], ans: 0 },
+        { section: "ぶんぽう (Grammar)", q: "あした 雨が ( )、ピクニックに 行きません。", options: ["降る", "降ったら", "降っても", "降りて"], ans: 1 },
+        { section: "ぶんぽう (Grammar)", q: "先生は 私に 本を ( )。", options: ["あげました", "くれました", "もらいました", "かしました"], ans: 1 },
+        { section: "どっかい (Reading)", subtext: "日本の 電車は とても べんりですが、朝は とても こみます。だから、私は いつも 早く 起きて、すいている 電車に 乗ります。", q: "この人は どうして 早く 起きますか。", options: ["電車が 好きだから", "べんりだから", "こんでいる 電車に 乗りたくないから", "朝が 好きだから"], ans: 2 }
+      ]
+    };
+
+    let currentExam = [];
+    let userAnswers = {};
+
     function loadExam(level) {
-      currentLevel = level;
-      document.getElementById('btn-n5').classList.remove('active');
-      document.getElementById('btn-n4').classList.remove('active');
-      document.getElementById(`btn-${level.toLowerCase()}`).classList.add('active');
+      document.querySelectorAll('.level-btn').forEach(b => b.classList.remove('active'));
+      event.currentTarget.classList.add('active');
+      document.getElementById('exam-result').innerHTML = '';
       
       const container = document.getElementById('exam-container');
       container.innerHTML = '';
-      document.getElementById('exam-result').innerText = '';
+      currentExam = examData[level];
+      userAnswers = {};
+
+      let currentSection = "";
       
-      JLPT_DATA.exams[level].forEach((item, i) => {
-        let opts = item.options.map((o, oi) => 
-          `<button class="opt-btn" data-q="${i}" data-opt="${oi}" onclick="selectOpt(this, ${i})">${oi + 1}. ${o}</button>`
+      currentExam.forEach((item, index) => {
+        if(item.section !== currentSection) {
+          container.innerHTML += `<div class="jlpt-section">${item.section}</div>`;
+          currentSection = item.section;
+        }
+
+        let subHTML = item.subtext ? `<div class="q-subtext">${item.subtext}</div>` : '';
+        let optsHTML = item.options.map((opt, oIdx) => 
+          `<button class="opt-btn" onclick="selectAnswer(${index}, ${oIdx}, this)">${oIdx + 1}. ${opt}</button>`
         ).join('');
-        
+
         container.innerHTML += `
-          <div class="question-box" id="qbox-${i}">
-            <p style="font-size:1.1rem; font-weight:bold;">問${i+1}: ${item.q}</p>
-            <div class="options-container">${opts}</div>
+          <div class="question-box" id="q-${index}">
+            ${subHTML}
+            <div class="q-text">問${index + 1}. ${item.q}</div>
+            <div class="options-grid">${optsHTML}</div>
           </div>
         `;
       });
     }
 
-    function selectOpt(btn, qIndex) {
-      const container = document.getElementById(`qbox-${qIndex}`);
-      container.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('selected'));
+    function selectAnswer(qIndex, optIndex, btn) {
+      userAnswers[qIndex] = optIndex;
+      const box = document.getElementById(`q-${qIndex}`);
+      box.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('selected'));
       btn.classList.add('selected');
     }
 
     function gradeExam() {
       let score = 0;
-      const questions = JLPT_DATA.exams[currentLevel];
-      
-      questions.forEach((item, i) => {
-        const container = document.getElementById(`qbox-${i}`);
-        const selectedBtn = container.querySelector('.opt-btn.selected');
-        const allBtns = container.querySelectorAll('.opt-btn');
-        
-        allBtns.forEach((b, optIndex) => {
+      currentExam.forEach((item, index) => {
+        const box = document.getElementById(`q-${index}`);
+        const btns = box.querySelectorAll('.opt-btn');
+        btns.forEach((b, i) => {
           b.classList.remove('correct', 'wrong');
-          if (optIndex === item.ans) b.classList.add('correct');
-          else if (b === selectedBtn) b.classList.add('wrong');
+          if (i === item.ans) b.classList.add('correct');
+          else if (i === userAnswers[index]) b.classList.add('wrong');
         });
-        
-        if (selectedBtn && parseInt(selectedBtn.dataset.opt) === item.ans) {
-          score++;
-        }
+        if (userAnswers[index] === item.ans) score++;
       });
       
-      const resultDiv = document.getElementById('exam-result');
-      const percent = Math.round((score / questions.length) * 100);
-      resultDiv.style.color = percent >= 60 ? 'var(--success)' : 'var(--danger)';
-      resultDiv.innerText = `Score: ${score} / ${questions.length} (${percent}%)`;
+      const res = document.getElementById('exam-result');
+      const percent = (score / currentExam.length) * 100;
+      res.style.color = percent >= 60 ? 'var(--success)' : 'var(--danger)';
+      res.innerHTML = `Result: ${score} / ${currentExam.length} (${percent}%)`;
     }
 
-    window.onload = () => {
-      loadExam('N5');
+    /* Initialize N5 Exam on load */
+    window.onload = () => loadExam('N5');
+
+    /*──────────────────────────────────────────────────────────────────────────*/
+    /* Game 1: Chat Logic                                                       */
+    /*──────────────────────────────────────────────────────────────────────────*/
+    const chatSequence = [
+      { npc: "京都ですか！いいですね。何を見ましたか？", opts: ["映画を見ました", "お寺を見ました", "何も見ません", "はい、そうです"], ans: 1 },
+      { npc: "お寺はきれいでしたか？", opts: ["はい、とてもきれいでした", "いいえ、きれいです", "静かでしたか", "お寺があります"], ans: 0 },
+      { npc: "素晴らしい！また話しましょう！", opts: ["さようなら！", "こんにちは！", "わかりません", "はい、また！"], ans: 3 }
+    ];
+    let chatStep = 0;
+
+    function chatReply(isCorrect, btn) {
+      if(!isCorrect) {
+        btn.classList.add('wrong');
+        setTimeout(() => btn.classList.remove('wrong'), 500);
+        return;
+      }
       
-      let verbHtml = "<h2>The 3 Verb Groups</h2><p>Here are the essential verbs and their conjugations:</p>";
-      verbHtml += "<table><tr><th>Group</th><th>Dictionary (Plain)</th><th>Masu (Polite)</th><th>Te-Form</th><th>Meaning</th></tr>";
-      JLPT_DATA.verbs.forEach(v => {
-        verbHtml += `<tr><td>${v.group}</td><td><strong>${v.plain}</strong></td><td>${v.masu}</td><td>${v.te}</td><td>${v.meaning}</td></tr>`;
-      });
-      verbHtml += "</table>";
-      document.getElementById('verb-content').innerHTML = verbHtml;
-    };
+      const windowDiv = document.getElementById('chat-window');
+      const opsDiv = document.getElementById('chat-options');
+      
+      // Player bubble
+      windowDiv.innerHTML += `<div class="bubble player">${btn.innerText}</div>`;
+      windowDiv.scrollTop = windowDiv.scrollHeight;
+      
+      if(chatStep < chatSequence.length) {
+        opsDiv.innerHTML = ''; // disable clicking while waiting
+        setTimeout(() => {
+          windowDiv.innerHTML += `<div class="bubble npc">田中：${chatSequence[chatStep].npc}</div>`;
+          windowDiv.scrollTop = windowDiv.scrollHeight;
+          
+          let newOpts = chatSequence[chatStep].opts.map((o, i) => 
+            `<button class="opt-btn" onclick="chatReply(${i === chatSequence[chatStep].ans}, this)">${o}</button>`
+          ).join('');
+          opsDiv.innerHTML = newOpts;
+          chatStep++;
+        }, 1000);
+      } else {
+        opsDiv.innerHTML = '<b>Conversation Complete! 完璧！</b>';
+      }
+    }
+
+    /*──────────────────────────────────────────────────────────────────────────*/
+    /* Game 2: Connect Logic                                                    */
+    /*──────────────────────────────────────────────────────────────────────────*/
+    const connectData = [
+      { k: "食べる", f: "たべる" }, { k: "行く", f: "いく" }, { k: "先生", f: "せんせい" }, { k: "時間", f: "じかん" }
+    ];
+    
+    let activeKanji = null;
+    let activeFurigana = null;
+
+    function initConnect() {
+      const area = document.getElementById('connect-area');
+      // Shuffle arrays
+      let kArr = [...connectData].sort(() => Math.random() - 0.5);
+      let fArr = [...connectData].sort(() => Math.random() - 0.5);
+
+      let kHtml = kArr.map(d => `<div class="connect-item" onclick="selKanji(this, '${d.f}')">${d.k}</div>`).join('');
+      let fHtml = fArr.map(d => `<div class="connect-item" onclick="selFuri(this, '${d.f}')">${d.f}</div>`).join('');
+
+      area.innerHTML = `<div class="connect-col" id="col-k">${kHtml}</div><div class="connect-col" id="col-f">${fHtml}</div>`;
+    }
+
+    function selKanji(el, ans) {
+      if(el.classList.contains('matched')) return;
+      document.querySelectorAll('#col-k .connect-item').forEach(e => e.classList.remove('active'));
+      el.classList.add('active');
+      activeKanji = { el, ans };
+      checkConnectMatch();
+    }
+
+    function selFuri(el, text) {
+      if(el.classList.contains('matched')) return;
+      document.querySelectorAll('#col-f .connect-item').forEach(e => e.classList.remove('active'));
+      el.classList.add('active');
+      activeFurigana = { el, text };
+      checkConnectMatch();
+    }
+
+    function checkConnectMatch() {
+      if(activeKanji && activeFurigana) {
+        if(activeKanji.ans === activeFurigana.text) {
+          activeKanji.el.classList.replace('active', 'matched');
+          activeFurigana.el.classList.replace('active', 'matched');
+          activeKanji = null; activeFurigana = null;
+        } else {
+          activeKanji.el.classList.add('wrong');
+          activeFurigana.el.classList.add('wrong');
+          setTimeout(() => {
+            if(activeKanji) activeKanji.el.classList.remove('active', 'wrong');
+            if(activeFurigana) activeFurigana.el.classList.remove('active', 'wrong');
+            activeKanji = null; activeFurigana = null;
+          }, 500);
+        }
+      }
+    }
+    setTimeout(initConnect, 500);
+
+    /*──────────────────────────────────────────────────────────────────────────*/
+    /* Game 3: Samurai Slash                                                    */
+    /*──────────────────────────────────────────────────────────────────────────*/
+    let slashScore = 0;
+    let slashInterval;
+    const arena = document.getElementById('slash-arena');
+    const particles = ["を", "が", "に", "で"];
+    
+    function startSamuraiGame() {
+      clearInterval(slashInterval);
+      arena.innerHTML = `<div class="slash-prompt" id="slash-prompt">私はすし __ 食べます。</div>`;
+      slashScore = 0;
+      document.getElementById('slash-score').innerText = "Score: 0";
+      
+      slashInterval = setInterval(spawnTarget, 1000);
+      setTimeout(() => { clearInterval(slashInterval); alert("Game Over! Score: " + slashScore); }, 15000); // 15s game
+    }
+
+    function spawnTarget() {
+      let t = document.createElement('div');
+      t.className = 'target-word';
+      // Pick random particle. 1/4 chance to be the correct "を"
+      let isCorrect = Math.random() < 0.3; 
+      t.innerText = isCorrect ? "を" : particles[Math.floor(Math.random() * particles.length)];
+      
+      t.style.top = Math.random() * 200 + 'px';
+      t.style.left = '-50px';
+      
+      arena.appendChild(t);
+      
+      let pos = -50;
+      let speed = Math.random() * 3 + 2;
+      
+      let move = setInterval(() => {
+        if (pos > arena.offsetWidth) { clearInterval(move); t.remove(); }
+        pos += speed;
+        t.style.left = pos + 'px';
+      }, 20);
+
+      t.onmousedown = (e) => {
+        // Visual slash effect
+        let slash = document.createElement('div');
+        slash.className = 'slash-effect';
+        slash.style.left = e.offsetX + 'px';
+        slash.style.top = e.offsetY + 'px';
+        slash.style.animation = 'slashAnim 0.3s forwards';
+        t.appendChild(slash);
+
+        if(t.innerText === "を") {
+          slashScore += 10;
+          t.style.background = 'var(--success)';
+          t.style.color = 'white';
+        } else {
+          slashScore -= 5;
+          t.style.background = 'var(--danger)';
+          t.style.color = 'white';
+        }
+        document.getElementById('slash-score').innerText = "Score: " + slashScore;
+        setTimeout(() => t.remove(), 200);
+      };
+    }
   </script>
 </body>
 </html>
-
-          
